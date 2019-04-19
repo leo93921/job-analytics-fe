@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { JobListComponent } from './components/job-list/job-list.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'job-list',
     component: JobListComponent

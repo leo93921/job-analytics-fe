@@ -1,0 +1,41 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col text-center">
+
+      <div class="card text-white bg-primary">
+        <div class="card-body pb-0">
+            <div class="text-value">1.299</div>
+            <div>Offerte tracciate</div>
+        </div>
+        <div class="chart-wrapper my-3 mx-3">
+            <canvas baseChart class="chart chart-bar"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="false"
+            [chartType]="'line'"></canvas>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" [routerLink]="['job-list']">Lista offerte</button>
+    </div>
+    <div class="col text-center">
+        <div class="card text-white bg-danger">
+          <div class="card-body pb-0">
+              <div class="text-value">127</div>
+              <div>Aziende tracciate</div>
+          </div>
+          <div class="chart-wrapper my-3 mx-3">
+              <canvas baseChart class="chart chart-bar"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="false"
+              [chartType]="'line'"></canvas>
+          </div>
+        </div>
+        <button type="button" class="btn btn-danger">Lista aziende</button>
+      </div>
+  </div>
+</div>
