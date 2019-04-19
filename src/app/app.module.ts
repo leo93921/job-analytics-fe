@@ -7,12 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JobListComponent } from './components/job-list/job-list.component';
 import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { ContainerComponent } from './components/layout/container/container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JobListComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent,
+    ContainerComponent
   ],
   imports: [
     BrowserModule,
