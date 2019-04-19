@@ -1,41 +1,38 @@
-<div class="container mt-3">
-  <div class="row">
-    <div class="col text-center">
-
-      <div class="card text-white bg-primary">
-        <div class="card-body pb-0">
-            <div class="text-value">1.299</div>
-            <div>Offerte tracciate</div>
+<div class="row">
+  <div class="col">
+      <div class="jumbotron">
+          <h1 class="display-4">Welcome!</h1>
+          <p class="lead">Welcome to our analytics platform, which constantly fetch data from different sites in order to present you the best meaningful analytics on the jobs environment.</p>
+          <hr class="my-4">
+          <p>The sites supported are Glassdoor, Linkedin and Monster.</p>
         </div>
-        <div class="chart-wrapper my-3 mx-3">
-            <canvas baseChart class="chart chart-bar"
-            [datasets]="lineChartData"
-            [labels]="lineChartLabels"
-            [options]="lineChartOptions"
-            [colors]="lineChartColors"
-            [legend]="false"
-            [chartType]="'line'"></canvas>
-        </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-center mt-3">
+    <div class="card text-white bg-primary">
+      <div class="card-body pb-0">
+        <div class="text-value">1.299</div>
+        <div>Tracked job offers</div>
       </div>
-      <button type="button" class="btn btn-primary" [routerLink]="['job-list']">Lista offerte</button>
+      <div class="chart-wrapper my-3 mx-3">
+        <canvas baseChart class="chart chart-bar" [datasets]="lineChartData" [labels]="lineChartLabels"
+          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="false" [chartType]="'line'"></canvas>
+      </div>
     </div>
-    <div class="col text-center">
-        <div class="card text-white bg-danger">
-          <div class="card-body pb-0">
-              <div class="text-value">127</div>
-              <div>Aziende tracciate</div>
-          </div>
-          <div class="chart-wrapper my-3 mx-3">
-              <canvas baseChart class="chart chart-bar"
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="lineChartColors"
-              [legend]="false"
-              [chartType]="'line'"></canvas>
-          </div>
-        </div>
-        <button type="button" class="btn btn-danger">Lista aziende</button>
+    <button type="button" class="btn btn-primary" [routerLink]="['job-list']">Job offers</button>
+  </div>
+  <div class="col text-center mt-3">
+    <div class="card text-white bg-danger">
+      <div class="card-body pb-0">
+        <div class="text-value">127</div>
+        <div>Tracked companies</div>
       </div>
+      <div class="chart-wrapper my-3 mx-3">
+        <canvas baseChart class="chart chart-bar" [datasets]="lineChartData" [labels]="lineChartLabels"
+          [options]="lineChartOptions" [colors]="lineChartColors" [legend]="false" [chartType]="'line'"></canvas>
+      </div>
+    </div>
+    <button type="button" class="btn btn-danger">Companies</button>
   </div>
 </div>
