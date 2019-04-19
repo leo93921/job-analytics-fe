@@ -1,0 +1,31 @@
+<div class="container mt-3">
+  <h1>Job offers</h1>
+
+  <table class="table my-3">
+    <thead class="thead-dark text-center">
+      <tr>
+        <th rowspan="2" scope="col" class="align-middle">Name</th>
+        <th rowspan="2" scope="col" class="align-middle">First visit</th>
+        <th rowspan="2" scope="col" class="align-middle">Last visit</th>
+        <th rowspan="2" scope="col" class="align-middle">Platform</th>
+        <th colspan="2" scope="col" class="align-middle">Company</th>
+        <th rowspan="2" scope="col" class="align-middle">Actions</th>
+      </tr>
+      <tr>
+        <th scope="col" class="align-middle">Name</th>
+        <th scope="col" class="align-middle">First visit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of [1,2,3,4,5,6,7]">
+        <th scope="row">Software Engineer</th>
+        <td>21/01/2019</td>
+        <td>21/03/2019</td>
+        <td>Glassdoor</td>
+        <td>Apple</td>
+        <td>21/01/2019</td>
+        <td>Visualizza</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
