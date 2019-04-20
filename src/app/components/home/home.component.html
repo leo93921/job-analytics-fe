@@ -29,10 +29,10 @@
         <div>Tracked companies</div>
       </div>
       <div class="chart-wrapper my-3 mx-3">
-        <canvas baseChart class="chart chart-bar" [datasets]="lineChartData" [labels]="lineChartLabels"
+        <canvas baseChart class="chart chart-bar" [datasets]="lineChartData2" [labels]="lineChartLabels"
           [options]="lineChartOptions" [colors]="lineChartColors" [legend]="false" [chartType]="'line'"></canvas>
       </div>
     </div>
-    <button type="button" class="btn btn-danger">Companies</button>
+    <button type="button" class="btn btn-danger" [routerLink]="['/company-list']">Companies</button>
   </div>
 </div>

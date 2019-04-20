@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, BaseChartDirective, Label } from 'ng2-charts';
+import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
 @Component({
@@ -12,7 +12,10 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 export class HomeComponent implements OnInit {
 
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', datalabels: {display: false} }
+  ];
+  public lineChartData2: ChartDataSets[] = [
+    { data: [0, 12, 35, 50, 98, 101, 158], label: 'Series A', datalabels: {display: false} }
   ];
   public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions: (ChartOptions) = {
