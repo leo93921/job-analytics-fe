@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartType, ChartOptions, ChartDataSets } from 'chart.js';
+import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 
