@@ -4,6 +4,7 @@ import { JobListComponent } from './components/job-list/job-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { ContainerComponent } from './components/layout/container/container.component';
 import { CompanyListComponent } from './components/company-list/company-list.component';
+import { CompanyDetailComponent } from './components/company-detail/company-detail.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'company-list',
         component: CompanyListComponent
+      },
+      {
+        path: 'company/:id',
+        component: CompanyDetailComponent
       }
     ]
   }

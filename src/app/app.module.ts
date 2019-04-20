@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { ContainerComponent } from './components/layout/container/container.component';
 import { CompanyListComponent } from './components/company-list/company-list.component';
+import { CompanyDetailComponent } from './components/company-detail/company-detail.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CompanyListComponent } from './components/company-list/company-list.com
     HomeComponent,
     NavbarComponent,
     ContainerComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    CompanyDetailComponent
   ],
   imports: [
     BrowserModule,
