@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ContainerComponent } from './components/layout/container/container.component';
 import { CompanyListComponent } from './components/company-list/company-list.component';
 import { CompanyDetailComponent } from './components/company-detail/company-detail.component';
+import { JobDetailComponent } from './components/job-detail/job-detail.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'job-list',
         component: JobListComponent
+      },
+      {
+        path: 'job/:id',
+        component: JobDetailComponent
       },
       {
         path: 'company-list',

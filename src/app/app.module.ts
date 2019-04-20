@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { ContainerComponent } from './components/layout/container/container.component';
 import { CompanyListComponent } from './components/company-list/company-list.component';
 import { CompanyDetailComponent } from './components/company-detail/company-detail.component';
+import { JobDetailComponent } from './components/job-detail/job-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CompanyDetailComponent } from './components/company-detail/company-deta
     NavbarComponent,
     ContainerComponent,
     CompanyListComponent,
-    CompanyDetailComponent
+    CompanyDetailComponent,
+    JobDetailComponent
   ],
   imports: [
     BrowserModule,
