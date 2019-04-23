@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { JobService } from 'src/app/services/job.service';
+import { Page } from 'src/app/models/page';
+import { Job } from 'src/app/models/job';
 
 @Component({
   selector: 'app-job-list',
@@ -9,6 +12,9 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
   styleUrls: ['./job-list.component.css']
 })
 export class JobListComponent implements OnInit {
+
+  private jobsPage: Page<Job>;
+
   public pieChartOptions: ChartOptions = {
     responsive: true,
     legend: {
@@ -66,9 +72,19 @@ export class JobListComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private jobService: JobService
+  ) {
+    this.loadData(0);
+  }
 
   ngOnInit() {
+  }
+
+  public loadData(pageNumber: number) {
+    this.jobService.getJobs(pageNumber).subscribe(res => {
+      this.jobsPage = res;
+    });
   }
 
 }

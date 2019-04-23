@@ -1,6 +1,6 @@
 <h1>Job offers</h1>
 
-<div class="row">
+<div class="row mb-3">
   <div class="col">
     <table class="table my-3">
       <thead class="thead-dark text-center">
@@ -18,29 +18,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of [1,2,3,4,5,6,7]">
+        <tr *ngFor="let j of jobsPage?.content">
           <th scope="row">Software Engineer</th>
-          <td>21/01/2019</td>
-          <td>21/03/2019</td>
+          <td>{{ j.posted ? (j.posted | date) : "N/A" }}</td>
+          <td>{{ j.hiringDate ? (j.hiringDate | date) : "N/A" }}</td>
           <td>Glassdoor</td>
           <td>Apple</td>
           <td>21/01/2019</td>
           <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/job/1234']">See</button></td>
         </tr>
+        <tr *ngIf="jobsPage?.content.length === 0">
+          <td colspan="7"><small>Nessuna offerta tracciata.</small></td>
+        </tr>
       </tbody>
     </table>
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
+        <li class="page-item" *ngIf="!jobsPage?.first">
+          <a class="page-link" (click)="loadData(jobsPage?.number - 1);$event.preventDefault();" href="" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
+        <li class="page-item" *ngIf="jobsPage?.number > 0"><a class="page-link" (click)="loadData(jobsPage?.number - 1);$event.preventDefault();" href="">{{ jobsPage?.number }}</a></li>
+        <li class="page-item active"><a class="page-link" role="button">{{ (jobsPage?.number + 1 ) }}</a></li>
+        <li class="page-item" *ngIf="!jobsPage?.last"><a class="page-link" (click)="loadData(jobsPage?.number + 1);$event.preventDefault();" href="">{{ jobsPage?.number + 2 }}</a></li>
+        <li class="page-item" *ngIf="!jobsPage?.last">
+          <a class="page-link" (click)="loadData(jobsPage?.number + 1);$event.preventDefault();" href="" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
