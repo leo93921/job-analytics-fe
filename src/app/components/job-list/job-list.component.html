@@ -32,7 +32,7 @@
         </tr>
       </tbody>
     </table>
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation">
       <ul class="pagination justify-content-center">
         <li class="page-item" *ngIf="!jobsPage?.first">
           <a class="page-link" (click)="loadData(jobsPage?.number - 1);$event.preventDefault();" href="" aria-label="Previous">
