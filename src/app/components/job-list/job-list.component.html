@@ -20,12 +20,12 @@
       <tbody>
         <tr *ngFor="let j of jobsPage?.content">
           <th scope="row">Software Engineer</th>
-          <td>{{ j.posted ? (j.posted | date) : "N/A" }}</td>
-          <td>{{ j.hiringDate ? (j.hiringDate | date) : "N/A" }}</td>
+          <td>{{ j.firstVisit ? (j.firstVisit | date) : "N/A" }}</td>
+          <td>{{ j.lastVisit ? (j.lastVisit | date) : "N/A" }}</td>
           <td>Glassdoor</td>
           <td>Apple</td>
           <td>21/01/2019</td>
-          <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/job/1234']">See</button></td>
+          <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/job/', j.id]">See</button></td>
         </tr>
         <tr *ngIf="jobsPage?.content.length === 0">
           <td colspan="7"><small>Nessuna offerta tracciata.</small></td>

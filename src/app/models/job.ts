@@ -1,9 +1,8 @@
 export class Job {
-  counter: number;
-  date: Date;
-  hiringDate: Date;
+  id: string;
+  firstVisit: Date;
+  lastVisit: Date;
   link: string;
-  posted: Date;
   requirements: string[];
   responsibilities: string[];
 }
