@@ -13,11 +13,15 @@ export class CompanyService {
 
   constructor(private http: HttpClient) { }
 
-  public getJobs(page: number): Observable<Page<Company>> {
+  public getCompanies(page: number): Observable<Page<Company>> {
     return this.http.get<Page<Company>>(`${this.END_POINT}`, {
       params: {
         page: page.toString()
       }
     });
+  }
+
+  public getCompanyById(id: string): Observable<Company> {
+    return this.http.get<Company>(`${this.END_POINT}/${id}`);
   }
 }

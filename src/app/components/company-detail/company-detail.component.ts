@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Company } from 'src/app/models/company';
+import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
   selector: 'app-company-detail',
@@ -8,13 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CompanyDetailComponent implements OnInit {
 
-  companyID: string|number;
+  company: Company;
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private companyService: CompanyService
   ) {
     this.activatedRoute.params.subscribe(params => {
-      this.companyID = params.id;
+      this.companyService.getCompanyById(params.id).subscribe(c => {
+        this.company = c;
+      });
     });
   }
 
