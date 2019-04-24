@@ -25,4 +25,12 @@ export class JobService {
   public getJob(id: string): Observable<Job> {
     return this.http.get<Job>(`${this.END_POINT}/${id}`);
   }
+
+  public getJobsForCompany(companyID: string, page: number): Observable<Page<Job>> {
+    return this.http.get<Page<Job>>(`${this.END_POINT}/from-company/${companyID}`, {
+      params: {
+        page: page.toString()
+      }
+    });
+  }
 }
