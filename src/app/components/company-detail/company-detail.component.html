@@ -5,14 +5,14 @@
     <div class="callout callout-warning">
       <small class="text-muted">First visit</small>
       <br>
-      <strong class="h4">21/03/2019</strong>
+      <strong class="h4">{{ company?.firstVisit ? (company.firstVisit | date) : 'N/A' }}</strong>
       <div class="chart-wrapper">
         <canvas id="sparkline-chart-3" width="100" height="30"></canvas>
       </div>
     </div>
   </div>
 
-  <div class="col-sm-4">
+<!--  <div class="col-sm-4">
     <div class="callout callout-success">
       <small class="text-muted">Last visit</small>
       <br>
@@ -21,7 +21,7 @@
         <canvas id="sparkline-chart-4" width="100" height="30"></canvas>
       </div>
     </div>
-  </div>
+  </div>-->
   <div class="col-sm-4">
       <div class="callout callout-danger">
         <small class="text-muted">Published offers</small>

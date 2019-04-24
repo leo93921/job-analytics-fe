@@ -19,12 +19,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let j of jobsPage?.content">
-          <th scope="row">Software Engineer</th>
+          <th scope="row">{{ j.name }}</th>
           <td>{{ j.firstVisit ? (j.firstVisit | date) : "N/A" }}</td>
           <td>{{ j.lastVisit ? (j.lastVisit | date) : "N/A" }}</td>
-          <td>Glassdoor</td>
-          <td>Apple</td>
-          <td>21/01/2019</td>
+          <td>{{ j.platform }}</td>
+          <td>{{ j.company?.name }}</td>
+          <td>{{ j.company?.firstVisit ? (j.company.firstVisit | date) : 'N/A' }}</td>
           <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/job/', j.id]">See</button></td>
         </tr>
         <tr *ngIf="jobsPage?.content.length === 0">
