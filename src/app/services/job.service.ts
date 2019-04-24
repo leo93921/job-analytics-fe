@@ -21,4 +21,8 @@ export class JobService {
       }
     });
   }
+
+  public getJob(id: string): Observable<Job> {
+    return this.http.get<Job>(`${this.END_POINT}/${id}`);
+  }
 }
