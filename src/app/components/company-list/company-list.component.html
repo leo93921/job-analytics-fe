@@ -15,8 +15,8 @@
         <tr *ngFor="let c of companiesPage?.content">
           <th scope="row">{{ c.name }}</th>
           <td>{{ c.firstVisit ? (c.firstVisit | date) : 'N/A' }}</td>
-          <td>12</td>
-          <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/company/', c.id]">See</button></td>
+          <td>{{ c.jobCount }}</td>
+          <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/company/', c._id]">See</button></td>
         </tr>
         <tr *ngIf="companiesPage?.content.length === 0">
           <td colspan="4"><small>No companies tracked.</small></td>

@@ -5,7 +5,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { CompanyService } from 'src/app/services/company.service';
 import { Page } from 'src/app/models/page';
-import { Company } from 'src/app/models/company';
+import { CompanyWithJobCount } from 'src/app/models/company-with-job-count';
 
 @Component({
   selector: 'app-company-list',
@@ -14,7 +14,7 @@ import { Company } from 'src/app/models/company';
 })
 export class CompanyListComponent implements OnInit {
 
-  companiesPage: Page<Company>;
+  companiesPage: Page<CompanyWithJobCount>;
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
