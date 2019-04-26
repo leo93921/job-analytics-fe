@@ -5,6 +5,7 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { JobService } from 'src/app/services/job.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { JobService } from 'src/app/services/job.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  public jobsCount: number;
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Daily added jobs', datalabels: {display: false} }
   ];
@@ -70,14 +71,20 @@ export class HomeComponent implements OnInit {
     private jobService: JobService,
     @Inject(LOCALE_ID) public locale: string
   ) {
-    this.jobService.getHistory().subscribe(list => {
+    forkJoin(
+      this.jobService.getHistory(),
+      this.jobService.getCount()
+    ).subscribe(res => {
+      // Build job history
+      const list = res[0];
       this.lineChartData[0].data.length = 0;
       this.lineChartLabels = [];
       for (const item of list) {
         this.lineChartData[0].data.push(item.count);
         this.lineChartLabels.push(formatDate(item.date, 'EEEE, MMMM d, y', locale));
       }
-
+      // Get job count
+      this.jobsCount = res[1];
     });
   }
 

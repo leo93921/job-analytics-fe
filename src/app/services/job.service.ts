@@ -40,4 +40,8 @@ export class JobService {
       `${this.END_POINT}/history`
     );
   }
+
+  public getCount(): Observable<number> {
+    return this.http.get<number>(`${this.END_POINT}/count`);
+  }
 }
