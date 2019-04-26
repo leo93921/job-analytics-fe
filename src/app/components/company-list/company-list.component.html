@@ -18,7 +18,7 @@
           <td>{{ c.jobCount }}</td>
           <td><button type="button" class="btn btn-primary btn-sm" [routerLink]="['/company/', c._id]">See</button></td>
         </tr>
-        <tr *ngIf="companiesPage?.content.length === 0">
+        <tr *ngIf="!companiesPage || (companiesPage.content.length === 0)">
           <td colspan="4"><small>No companies tracked.</small></td>
         </tr>
       </tbody>
