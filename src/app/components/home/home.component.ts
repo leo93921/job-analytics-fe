@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import { JobService } from 'src/app/services/job.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,7 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 export class HomeComponent implements OnInit {
 
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', datalabels: {display: false} }
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Daily added jobs', datalabels: {display: false} }
   ];
   public lineChartData2: ChartDataSets[] = [
     { data: [0, 12, 35, 50, 98, 101, 158], label: 'Series A', datalabels: {display: false} }
@@ -63,7 +65,21 @@ export class HomeComponent implements OnInit {
     }
   ];
   public lineChartPlugins = [pluginAnnotations];
-  constructor() { }
+
+  constructor(
+    private jobService: JobService,
+    @Inject(LOCALE_ID) public locale: string
+  ) {
+    this.jobService.getHistory().subscribe(list => {
+      this.lineChartData[0].data.length = 0;
+      this.lineChartLabels = [];
+      for (const item of list) {
+        this.lineChartData[0].data.push(item.count);
+        this.lineChartLabels.push(formatDate(item.date, 'EEEE, MMMM d, y', locale));
+      }
+
+    });
+  }
 
   ngOnInit() {
   }
