@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Page } from '../models/page';
 import { Company } from '../models/company';
 import { CompanyWithJobCount } from '../models/company-with-job-count';
+import { TrackingHistoryItem } from '../models/job-tracking-history-item';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class CompanyService {
 
   public getCompanyById(id: string): Observable<Company> {
     return this.http.get<Company>(`${this.END_POINT}/${id}`);
+  }
+
+  public getHistory(): Observable<TrackingHistoryItem[]> {
+    return this.http.get<TrackingHistoryItem[]>(`${this.END_POINT}/history`);
   }
 }

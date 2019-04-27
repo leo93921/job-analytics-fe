@@ -8,7 +8,7 @@
         </div>
   </div>
 </div>
-<div class="row">
+<div class="row mb-5">
   <div class="col text-center mt-3">
     <div class="card text-white bg-primary">
       <div class="card-body pb-0">
@@ -29,7 +29,7 @@
         <div>Tracked companies</div>
       </div>
       <div class="chart-wrapper my-3 mx-3">
-        <canvas baseChart class="chart chart-bar" [datasets]="lineChartData2" [labels]="lineChartLabels"
+        <canvas baseChart class="chart chart-bar" [datasets]="lineChartCompanyData" [labels]="lineChartCompanyLabels"
           [options]="lineChartOptions" [colors]="lineChartColors" [legend]="false" [chartType]="'line'"></canvas>
       </div>
     </div>

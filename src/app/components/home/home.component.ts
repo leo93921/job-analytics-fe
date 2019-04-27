@@ -6,6 +6,7 @@ import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { JobService } from 'src/app/services/job.service';
 import { forkJoin } from 'rxjs';
+import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +18,11 @@ export class HomeComponent implements OnInit {
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Daily added jobs', datalabels: {display: false} }
   ];
-  public lineChartData2: ChartDataSets[] = [
-    { data: [0, 12, 35, 50, 98, 101, 158], label: 'Series A', datalabels: {display: false} }
+  public lineChartCompanyData: ChartDataSets[] = [
+    { data: [0, 12, 35, 50, 98, 101, 158], label: 'Daily added companies', datalabels: {display: false} }
   ];
   public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartCompanyLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions: (ChartOptions) = {
     responsive: true,
     scales: {
@@ -69,22 +71,35 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private jobService: JobService,
-    @Inject(LOCALE_ID) public locale: string
+    @Inject(LOCALE_ID) public locale: string,
+    private companyService: CompanyService
   ) {
     forkJoin(
       this.jobService.getHistory(),
-      this.jobService.getCount()
+      this.jobService.getCount(),
+      this.companyService.getHistory()
     ).subscribe(res => {
       // Build job history
       const list = res[0];
-      this.lineChartData[0].data.length = 0;
+      const jobData = this.lineChartData[0].data as number[];
+      jobData.length = 0;
       this.lineChartLabels = [];
       for (const item of list) {
-        this.lineChartData[0].data.push(item.count);
+        jobData.push(item.count);
         this.lineChartLabels.push(formatDate(item.date, 'EEEE, MMMM d, y', locale));
       }
       // Get job count
       this.jobsCount = res[1];
+
+      // Build company history
+      const companies = res[2];
+      const data = this.lineChartCompanyData[0].data as number[];
+      data.length = 0;
+      this.lineChartCompanyLabels = [];
+      for (const item of companies) {
+        data.push(item.count);
+        this.lineChartCompanyLabels.push(formatDate(item.date, 'EEEE, MMMM d, y', locale));
+      }
     });
   }
 
