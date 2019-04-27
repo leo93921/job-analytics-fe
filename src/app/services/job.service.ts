@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Page } from '../models/page';
 import { Observable } from 'rxjs';
 import { Job } from '../models/job';
-import { JobTrackingHistoryItem } from '../models/job-tracking-history-item';
+import { TrackingHistoryItem } from '../models/job-tracking-history-item';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +35,8 @@ export class JobService {
     });
   }
 
-  public getHistory(): Observable<JobTrackingHistoryItem[]> {
-    return this.http.get<JobTrackingHistoryItem[]>(
+  public getHistory(): Observable<TrackingHistoryItem[]> {
+    return this.http.get<TrackingHistoryItem[]>(
       `${this.END_POINT}/history`
     );
   }
