@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
+import { formatDate } from '@angular/common';
+
 import { ChartOptions, ChartDataSets } from 'chart.js';
-import { Label, Color } from 'ng2-charts';
+import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
+
 import { CompanyService } from 'src/app/services/company.service';
 import { Page } from 'src/app/models/page';
 import { CompanyWithJobCount } from 'src/app/models/company-with-job-count';
@@ -75,9 +78,22 @@ export class CompanyListComponent implements OnInit {
   public lineChartPlugins = [pluginAnnotations];
 
   constructor(
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    @Inject(LOCALE_ID) public locale: string
   ) {
     this.loadData(0);
+    this.companyService.getHistory().subscribe(list => {
+      const data = this.lineChartData[0].data as number[];
+      data.length = 0;
+      this.lineChartLabels.length = 0;
+
+      let index = 0;
+      for (const item of list) {
+        data.push(index === 0 ? item.count : (item.count + data[index - 1]));
+        this.lineChartLabels.push(formatDate(item.date, 'MMMM d, y', locale));
+        index++;
+      }
+    });
   }
 
   ngOnInit() {
