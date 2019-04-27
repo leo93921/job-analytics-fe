@@ -15,6 +15,8 @@ import { CompanyService } from 'src/app/services/company.service';
 })
 export class HomeComponent implements OnInit {
   public jobsCount: number;
+  public companiesCount: number;
+
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Daily added jobs', datalabels: {display: false} }
   ];
@@ -77,7 +79,8 @@ export class HomeComponent implements OnInit {
     forkJoin(
       this.jobService.getHistory(),
       this.jobService.getCount(),
-      this.companyService.getHistory()
+      this.companyService.getHistory(),
+      this.companyService.getCount()
     ).subscribe(res => {
       // Build job history
       const list = res[0];
@@ -100,6 +103,9 @@ export class HomeComponent implements OnInit {
         data.push(item.count);
         this.lineChartCompanyLabels.push(formatDate(item.date, 'EEEE, MMMM d, y', locale));
       }
+
+      // Get companies count
+      this.companiesCount = res[3];
     });
   }
 
