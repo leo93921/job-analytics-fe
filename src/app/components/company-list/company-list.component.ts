@@ -45,7 +45,7 @@ export class CompanyListComponent implements OnInit {
 
   // Line chart
   public lineChartData: ChartDataSets[] = [
-    { data: [0, 12, 35, 50, 98, 101, 158], label: 'Series A', datalabels: {display: false} }
+    { data: [0, 12, 35, 50, 98, 101, 158], label: 'Tracked companies', datalabels: {display: false} }
   ];
   public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions: (ChartOptions) = {
