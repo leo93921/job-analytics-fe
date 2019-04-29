@@ -1,4 +1,4 @@
-import { Component, OnInit, ApplicationRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
@@ -6,7 +6,6 @@ import { JobService } from 'src/app/services/job.service';
 import { Page } from 'src/app/models/page';
 import { Job } from 'src/app/models/job';
 import { PlatformService } from 'src/app/services/platform.service';
-import { HiredJob } from 'src/app/models/hired-job';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -81,32 +80,29 @@ export class JobListComponent implements OnInit {
 
   constructor(
     private jobService: JobService,
-    private platformService: PlatformService,
-    private ref: ApplicationRef,
-    private changeRef: ChangeDetectorRef
+    private platformService: PlatformService
   ) {
     this.loadData(0);
 
     forkJoin(
       this.platformService.getHiredJobsByPlatform(),
       this.platformService.getJobsPerPlatform()
-      ).subscribe( res =>{
+      ).subscribe( res => {
         const hiredJobs = res[0];
         const jobsPlat = res[1];
 
         hiredJobs.forEach(dat => {
-                   
-          switch(dat.days){
-            case "1-7":
+          switch (dat.days) {
+            case '1-7':
               this.getPlatformNumber(dat.platformName, dat.hiredJobs, 0);
               break;
-            case "8-14":
+            case '8-14':
               this.getPlatformNumber(dat.platformName, dat.hiredJobs, 1);
               break;
-            case "15-29":            
+            case '15-29':
               this.getPlatformNumber(dat.platformName, dat.hiredJobs, 2);
               break;
-            case "30+":
+            case '30+':
               this.getPlatformNumber(dat.platformName, dat.hiredJobs, 3);
               break;
           }
@@ -114,7 +110,7 @@ export class JobListComponent implements OnInit {
           const setUp1 = this.linkedinPositions;
           const setUp2 = this.glassdoorPositions;
           const setUp3 = this.monsterPositions;
-          
+
           this.barChartData[0].data = setUp1;
           this.barChartData[1].data = setUp2;
           this.barChartData[2].data = setUp3;
@@ -122,11 +118,12 @@ export class JobListComponent implements OnInit {
         });
 
         jobsPlat.forEach(dat => {
-          this.pieChartLabels.push(dat.platformName);
-          this.pieChartData.push(dat.jobsFound);
+          if (dat.platformName) {
+            this.pieChartLabels.push(dat.platformName);
+            this.pieChartData.push(dat.jobsFound);
+          }
         });
     });
-    
   }
 
   ngOnInit() {
@@ -138,19 +135,19 @@ export class JobListComponent implements OnInit {
     });
   }
 
-  private getPlatformNumber(name: string, value: number, position: number){
-    switch(name){
-      case "Linkedin":
+  private getPlatformNumber(name: string, value: number, position: number) {
+    switch (name) {
+      case 'Linkedin':
         this.linkedinPositions[position] = value;
         break;
-        
-      case "Glassdoor":
+
+      case 'Glassdoor':
         this.glassdoorPositions[position] = value;
         break;
 
-      case "Monster":
+      case 'Monster':
         this.monsterPositions[position] = value;
-        break; 
+        break;
     }
   }
 
