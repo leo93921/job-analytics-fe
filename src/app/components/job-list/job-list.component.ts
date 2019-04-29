@@ -18,9 +18,9 @@ export class JobListComponent implements OnInit {
 
   jobsPage: Page<Job>;
 
-  linkedinPositions = [];
-  monsterPositions = [];
-  glassdoorPositions = [];
+  linkedinPositions = [0, 0, 0, 0];
+  monsterPositions = [0, 0, 0, 0];
+  glassdoorPositions = [0, 0, 0, 0];
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -66,13 +66,13 @@ export class JobListComponent implements OnInit {
       hoverBackgroundColor: 'rgba(219,56,17,0.8)'
     },
     {
-      data: [0, 0, 0, 0],
+      data: [],
       label: 'Glassdoor',
       backgroundColor: 'rgba(254,153,0,1)',
       hoverBackgroundColor: 'rgba(254,153,0,0.8)'
     },
     {
-      data: [0, 0, 0, 0],
+      data: [],
       label: 'Monster',
       backgroundColor: 'rgba(69,132,237,1)',
       hoverBackgroundColor: 'rgba(69,132,237,0.8)'
@@ -95,12 +95,7 @@ export class JobListComponent implements OnInit {
         const jobsPlat = res[1];
 
         hiredJobs.forEach(dat => {
-          
-          for(let i = 0; i < 4; i++){
-            this.barChartData[0].data.push(0);
-            this.barChartData[1].data.push(0);
-            this.barChartData[2].data.push(0);
-          }
+                   
           switch(dat.days){
             case "1-7":
               this.getPlatformNumber(dat.platformName, dat.hiredJobs, 0);
@@ -115,6 +110,15 @@ export class JobListComponent implements OnInit {
               this.getPlatformNumber(dat.platformName, dat.hiredJobs, 3);
               break;
           }
+
+          const setUp1 = this.linkedinPositions;
+          const setUp2 = this.glassdoorPositions;
+          const setUp3 = this.monsterPositions;
+          
+          this.barChartData[0].data = setUp1;
+          this.barChartData[1].data = setUp2;
+          this.barChartData[2].data = setUp3;
+
         });
 
         jobsPlat.forEach(dat => {
@@ -137,15 +141,15 @@ export class JobListComponent implements OnInit {
   private getPlatformNumber(name: string, value: number, position: number){
     switch(name){
       case "Linkedin":
-        this.barChartData[0].data[position] = value;
+        this.linkedinPositions[position] = value;
         break;
         
       case "Glassdoor":
-        this.barChartData[1].data[position] = value;
+        this.glassdoorPositions[position] = value;
         break;
 
       case "Monster":
-        this.barChartData[2].data[position] = value;
+        this.monsterPositions[position] = value;
         break; 
     }
   }
