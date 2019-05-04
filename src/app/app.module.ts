@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ChartsModule } from 'ng2-charts';
@@ -29,7 +30,8 @@ import { JobDetailComponent } from './components/job-detail/job-detail.component
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import { Page } from 'src/app/models/page';
 import { Job } from 'src/app/models/job';
 import { PlatformService } from 'src/app/services/platform.service';
 import { forkJoin } from 'rxjs';
+import { SearchQuery } from 'src/app/models/search-query';
 
 @Component({
   selector: 'app-job-list',
@@ -15,6 +16,9 @@ import { forkJoin } from 'rxjs';
 })
 export class JobListComponent implements OnInit {
 
+  searching = false;
+  searchQuery: SearchQuery = {} as SearchQuery;
+  requirements: string;
   jobsPage: Page<Job>;
 
   linkedinPositions = [0, 0, 0, 0];
@@ -130,9 +134,13 @@ export class JobListComponent implements OnInit {
   }
 
   public loadData(pageNumber: number) {
-    this.jobService.getJobs(pageNumber).subscribe(res => {
-      this.jobsPage = res;
-    });
+    if (this.searching) {
+      this.search(pageNumber);
+    } else {
+      this.jobService.getJobs(pageNumber).subscribe(res => {
+        this.jobsPage = res;
+      });
+    }
   }
 
   private getPlatformNumber(name: string, value: number, position: number) {
@@ -149,6 +157,26 @@ export class JobListComponent implements OnInit {
         this.monsterPositions[position] = value;
         break;
     }
+  }
+
+  search(pageNumber: number) {
+    if ((!this.searchQuery.jobName || this.searchQuery.jobName.trim().length === 0) &&
+    this.requirements.trim().length === 0) {
+      this.searching = false;
+      this.loadData(0);
+      return;
+    } else {
+      this.searching = true;
+    }
+    if (this.requirements && this.requirements.trim().length > 0) {
+      this.searchQuery.requirements = this.requirements.trim().split(',');
+    } else {
+      this.searchQuery.requirements = [];
+    }
+
+    this.jobService.searchJobs(this.searchQuery, pageNumber).subscribe(list => {
+      this.jobsPage = list;
+    });
   }
 
 }

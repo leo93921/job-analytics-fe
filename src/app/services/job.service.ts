@@ -5,6 +5,7 @@ import { Page } from '../models/page';
 import { Observable } from 'rxjs';
 import { Job } from '../models/job';
 import { TrackingHistoryItem } from '../models/job-tracking-history-item';
+import { SearchQuery } from '../models/search-query';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,13 @@ export class JobService {
 
   public getCount(): Observable<number> {
     return this.http.get<number>(`${this.END_POINT}/count`);
+  }
+
+  public searchJobs(searchQuery: SearchQuery, pageNumber: number): Observable<Page<Job>> {
+    return this.http.post<Page<Job>>(`${this.END_POINT}/search`, searchQuery, {
+      params: {
+        page: pageNumber.toString()
+      }
+    });
   }
 }
