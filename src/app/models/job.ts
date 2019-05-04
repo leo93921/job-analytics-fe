@@ -10,4 +10,5 @@ export class Job {
   responsibilities: string[];
   platform: string;
   company: Company;
+  description: string;
 }
